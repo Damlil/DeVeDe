@@ -11,20 +11,29 @@ const mainElem = document.querySelector('main');
 const favMovElem = document.querySelector('#favMovies');
 
 
+
+
+
+
+
+
 addFavBtn.addEventListener('click', () => {       /// .  This Button Adds the Movie with Genre and Release Date to Database collection
     console.log('AddFav');
     const addTitle = inputTitle.value;
     const addGenre = inputGenre.value;
     const addDate = inputDate.value;
-    // if (addTitle || addGenre || addDate == '')
+    if (addTitle == '' || addGenre == '' || addDate == '') {
+        alert('Please fill out all fields')
+    }
     addFav(addTitle, addGenre, addDate);
 });
 
 
-showFavBtn.addEventListener('click', () => {
-    console.log('ShowFav');
-    getFavMovie()
-})
+
+
+
+
+
 
 
 async function getFavMovie() {
@@ -35,6 +44,18 @@ async function getFavMovie() {
         console.log(error);
     }
 }
+
+
+
+
+showFavBtn.addEventListener('click', () => {
+    console.log('ShowFav');
+    getFavMovie()
+})
+
+
+
+
 
 
 function showFavMovie(favMovies) {
@@ -56,6 +77,24 @@ function showFavMovie(favMovies) {
 
 
 
+
+
+// async function removeFav() {
+//     try {
+//        await deleteDoc(doc(db, "todos", todoId)); // Radera ett dokument med ett visst id
+//        await addDoc(collection(db, 'completedTodos'), { // Lägger till den todo som raderas i en annan collections som heter completedTodos
+//             todo: todoText 
+//         });
+//     } catch (error) {
+//         console.log('ERROR:', error);
+//     }
+// }
+
+
+
+
+
+
 async function addFav(addTitle, addGenre, addDate) {  ///     This function adds MovieTitle Genre and Relase Date to database.
 
     try {
@@ -68,3 +107,9 @@ async function addFav(addTitle, addGenre, addDate) {  ///     This function adds
         console.log('ERROR:', error);
     }
 }
+
+
+
+
+
+
