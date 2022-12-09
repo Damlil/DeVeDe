@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: 'Secular One', sans-serif;
 }
 
 body {
@@ -41,4 +42,9 @@ button {
     padding: 1rem;
     display: flex;
     align-items: center;
+}
+#favMovies {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }

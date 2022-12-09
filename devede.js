@@ -1,30 +1,4 @@
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-// TODO: Add SDKs for Firebase products that you want to use
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCxUkyyCiZeNg7V4t2JHA9ZTsU-ys-7xdc",
-    authDomain: "devede-7ad16.firebaseapp.com",
-    projectId: "devede-7ad16",
-    storageBucket: "devede-7ad16.appspot.com",
-    messagingSenderId: "1075767418780",
-    appId: "1:1075767418780:web:2ca60a68e6a7632ca97259",
-    measurementId: "G-1T100EF4CF"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const analytics = getAnalytics(app);
-
-
-/////////////////////
+import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, increment } from './firebase-config.js';
 
 const inputTitle = document.querySelector('#title');
 const inputGenre = document.querySelector('#genre');
@@ -33,28 +7,59 @@ const inputDate = document.querySelector('#date');
 const addFavBtn = document.querySelector('#addFav');
 const showFavBtn = document.querySelector('#showFav');
 
+const mainElem = document.querySelector('main');
+const favMovElem = document.querySelector('#favMovies');
 
 
-
-addFavBtn.addEventListener('click',() => {
+addFavBtn.addEventListener('click', () => {       /// .  This Button Adds the Movie with Genre and Release Date to Database collection
     console.log('AddFav');
     const addTitle = inputTitle.value;
     const addGenre = inputGenre.value;
     const addDate = inputDate.value;
+    // if (addTitle || addGenre || addDate == '')
     addFav(addTitle, addGenre, addDate);
-})
+});
 
 
-showFavBtn.addEventListener('click',() => {
+showFavBtn.addEventListener('click', () => {
     console.log('ShowFav');
+    getFavMovie()
 })
 
 
-
-async function addFav(addTitle, addGenre, addDate) {
-   
+async function getFavMovie() {
     try {
-        await addDoc(collection(db, 'Favorites'), { // Lägger till en ny todo i vår databas i vår collection todos
+        const favMovies = await getDocs(collection(db, 'Favorites'));
+        showFavMovie(favMovies);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+function showFavMovie(favMovies) {
+    favMovies.forEach((movie) => {
+        const favorites = `
+            <article>
+                <h3>${movie.data().Movie}</h3>
+                <p>Genre: ${movie.data().Genre}</p>
+                <p>Relase Date: ${movie.data().Release_Date}</p>
+                <button onclick="removeFav()">Remove Favorite</button>
+            </article>
+        `;
+        mainElem.style.display = 'none'
+        favMovElem.insertAdjacentHTML('beforeend', favorites);
+    })
+}
+
+
+
+
+
+async function addFav(addTitle, addGenre, addDate) {  ///     This function adds MovieTitle Genre and Relase Date to database.
+
+    try {
+        await addDoc(collection(db, 'Favorites'), {
             Movie: addTitle,
             Genre: addGenre,
             Release_Date: addDate
