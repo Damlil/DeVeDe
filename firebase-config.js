@@ -15,6 +15,18 @@
     measurementId: "G-1T100EF4CF"
   };
 
+
+
+// const firebaseConfig = {                                  CARLS API
+//     apiKey: "AIzaSyCXEL9NtaXEAzXJo0M7lHibBF4QbBOSkEg",
+//     authDomain: "solaris-f6c95.firebaseapp.com",
+//     projectId: "solaris-f6c95",
+//     storageBucket: "solaris-f6c95.appspot.com",
+//     messagingSenderId: "164463429902",
+//     appId: "1:164463429902:web:8a932b69a30fd42480af5f"
+//   };
+  
+
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
