@@ -3,6 +3,7 @@ import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, wher
 const inputTitle = document.querySelector('#title');
 const inputGenre = document.querySelector('#genre');
 const inputDate = document.querySelector('#date');
+const queryInput = document.querySelector('#query');
 
 const addFavBtn = document.querySelector('#addFav');
 const showFavBtn = document.querySelector('#showFav');
@@ -10,6 +11,7 @@ const backBtn = document.querySelector('#backBtn');
 
 
 const mainElem = document.querySelector('main');
+const footerElem = document.querySelector('footer');
 const favMovElem = document.querySelector('#favMovies');
 
 /////////////////////////////////////////////
@@ -40,10 +42,10 @@ async function addFav(addTitle, addGenre, addDate) {  ///     This function adds
 }
 
 showFavBtn.addEventListener('click', () => {                        // .  This button show all our favorite movies
-    console.log('ShowFav');
     getFavMovie()
 })
-backBtn.addEventListener('click', () => {
+
+backBtn.addEventListener('click', () => {                 //// .  Takes us Back to Start Page 
     window.location.reload();
 })
 
@@ -63,14 +65,15 @@ async function showFavMovie() {        /// .  Show all saved Favorite movies in 
         const favorites = `
             <article>
                 <div class="favMovieDiv">
-                <h3>${movie.data().Movie}</h3>
-                <p>Genre: ${movie.data().Genre}</p>
+                <h3>${movie.data().Movie}:</h3>
+                <p>${movie.data().Genre},</p>
                 <p>Relase Date: ${movie.data().Release_Date}</p>
-                <button class="removeFavBtn" movie_id="${movie.id}">Remove Favorite</button>
+                <button class="removeFavBtn" movie_id="${movie.id}">Remove</button>
                 </div>
             </article>    
         `;
         mainElem.style.display = 'none'
+        footerElem.style.display = 'none'
         backBtn.style.display = 'flex'
 
         favMovElem.insertAdjacentHTML('beforeend', favorites);
@@ -107,3 +110,46 @@ async function removeFromDatabase(movieID) {        /// This function removes Mo
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+const showQueryBtn = document.querySelector('#queryBtn');
+showQueryBtn.addEventListener('click', () => {
+    const queryValue = queryInput.value
+    console.log(queryValue);
+    searchMovie(queryValue)
+
+})
+
+
+
+// async function searchMovie(queryValue) {
+    
+    
+//     try {
+//         // Här bygger vi upp en fråga till vår databas, först bestämmer vi i vilken collection vi vill söka i collection(db, 'highscore')
+//         // Sen vad vi ska söka efter och detta fall efter ett specifikt användarnamn where('username', '==', stats.username);
+//         // Till sist utför vi frågan mot databasen await getDocs(usernameQuery);
+//         const movieQuery = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
+//         const result = await getDocs(movieQuery);
+//         let favMovQuery = {};
+//         // console.log(movieQuery);
+//         console.log(result);
+        
+//         result.forEach((username) => {
+//             favMovQuery = username
+//         });
+//         return favMovQuery
+        
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }

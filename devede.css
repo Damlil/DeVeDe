@@ -5,7 +5,7 @@
 
 body {
     min-height: 100vh;
-    background-color: blanchedalmond;
+    background-image: linear-gradient(to right, #051937, #004d7a, #008793, #00bf72, #a8eb12);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,16 @@ body {
 header {
     display: flex;
     justify-content: center;
-    color:hotpink;
+    color:black;
+    background-color: yellow;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 main {
@@ -22,13 +31,34 @@ main {
     flex-direction: column;
     align-items: center;
 }
-
+section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+.favMovieDiv {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
 .inputFields {
     display: flex;
     margin: 1rem;
 }
-
+h3 {
+    margin: 0.5rem
+}
+h4 {
+    display: flex;
+    width: 400px;
+    border: 1px solid rgb(54, 54, 54);
+    margin: auto;
+}
+p {
+    margin: 0.5rem;
+}
 input {
+    border-radius: 10px;
     margin: 1rem;
     height: 30px;
     text-align: center;
@@ -42,12 +72,42 @@ button {
     padding: 1rem;
     display: flex;
     align-items: center;
+    border-radius: 10px;
+    transition: all ease 0.1s;
 }
+button:active {
+    box-shadow: 0 5px rgb(43, 43, 43);
+    transform: translateY(3px);
+  }
 #favMovies {
     display: flex;
     justify-content: center;
     text-align: center;
 }
+.return {
+    display: flex;
+    justify-content: center;
+}
 #backBtn {
     display: none;
 }
+.queryEl {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+#addFav {
+    background-color: yellow;
+    font-weight: 600;
+    height: 40PX;
+}
+
+#showFav {
+    background-color: yellow;
+    font-weight: 600;
+    height: 40px;
+}
+.removeFavBtn {
+    background-color: yellow;
+    font-weight: 600;
+   }
