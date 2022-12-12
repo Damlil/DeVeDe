@@ -1,4 +1,5 @@
-import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, increment } from './firebase-config.js';
+import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, increment, collectionGroup } from './firebase-config.js';
+
 
 const inputTitle = document.querySelector('#title');
 const inputGenre = document.querySelector('#genre');
@@ -12,6 +13,8 @@ const backBtn = document.querySelector('#backBtn');
 
 const mainElem = document.querySelector('main');
 const footerElem = document.querySelector('footer');
+const qfavEl = document.querySelector('.queryFav');
+const q = document.querySelector('.qContainer');
 const favMovElem = document.querySelector('#favMovies');
 
 /////////////////////////////////////////////
@@ -117,39 +120,44 @@ async function removeFromDatabase(movieID) {        /// This function removes Mo
 
 
 
-
-
-
-
 const showQueryBtn = document.querySelector('#queryBtn');
 showQueryBtn.addEventListener('click', () => {
     const queryValue = queryInput.value
+
     console.log(queryValue);
-    searchMovie(queryValue)
+    movieQuery(queryValue)
 
 })
 
 
 
-// async function searchMovie(queryValue) {
-    
-    
-//     try {
-//         // Här bygger vi upp en fråga till vår databas, först bestämmer vi i vilken collection vi vill söka i collection(db, 'highscore')
-//         // Sen vad vi ska söka efter och detta fall efter ett specifikt användarnamn where('username', '==', stats.username);
-//         // Till sist utför vi frågan mot databasen await getDocs(usernameQuery);
-//         const movieQuery = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
-//         const result = await getDocs(movieQuery);
-//         let favMovQuery = {};
-//         // console.log(movieQuery);
-//         console.log(result);
-        
-//         result.forEach((username) => {
-//             favMovQuery = username
-//         });
-//         return favMovQuery
-        
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+
+
+
+
+async function movieQuery(queryValue) {
+
+
+
+
+
+    try {
+
+        const movieTitle = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
+        const result = await getDocs(movieTitle);
+
+        result.forEach((movie) => {
+            
+            const favoritesMov = `
+                    
+                    <h3>${movie.data().Movie}: Was found in the database</h3>
+              
+            `;
+            qfavEl.insertAdjacentHTML('beforeend', favoritesMov);
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
