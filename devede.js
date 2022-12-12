@@ -113,15 +113,8 @@ async function removeFromDatabase(movieID) {        /// This function removes Mo
 }
 
 
-
-
-
-
-
-
-
-const showQueryBtn = document.querySelector('#queryBtn');
-showQueryBtn.addEventListener('click', () => {
+const showQueryBtn = document.querySelector('#queryBtn');    /// Search MovieBase Button!      
+showQueryBtn.addEventListener('click', () => {             /// .  Takes the input field value and searches the Database collection Favorites
     const queryValue = queryInput.value
 
     console.log(queryValue);
@@ -129,18 +122,8 @@ showQueryBtn.addEventListener('click', () => {
 
 })
 
-
-
-
-
-
-
-async function movieQuery(queryValue) {
-
-
-
-
-
+async function movieQuery(queryValue) {      /// This function checks the database for the Value we put into the textfield on the site
+                                          /// If we get a match, it also displays that movie in the DOM
     try {
 
         const movieTitle = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
@@ -159,5 +142,5 @@ async function movieQuery(queryValue) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
