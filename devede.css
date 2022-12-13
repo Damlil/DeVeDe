@@ -6,6 +6,9 @@
 body {
     min-height: 100vh;
     background-image: linear-gradient(to right, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -123,3 +126,34 @@ button:active {
     display: flex;
     flex-direction: row;
 }
+
+
+@media only screen and (max-width: 850px) {
+
+.inputFields {
+    flex-direction: column;
+}
+h4 {
+    width: 50%;
+}
+#addFav {
+    margin: 0.2rem;
+}
+#showFav {
+    margin: 0.2rem;
+}
+#query {
+    margin-right: 0.2rem;
+}
+#queryBtn {
+    margin-left: 0.2rem;
+}
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    width: 50%;
+}
+}
+
