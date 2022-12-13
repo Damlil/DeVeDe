@@ -38,17 +38,27 @@ section {
     align-items: center;
  
 }
+article {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: auto;
+    width: 800px;
+
+}
 .favMovieDiv {
     display: flex;
+    justify-content: space-around;
     align-items: center;
     height: 45px;
+    grid-column: 2/3;
 }
 .inputFields {
     display: flex;
     margin: 1rem;
 }
 h3 {
-    margin: 0.5rem
+    margin: 0.5rem;
+    grid-column: 1/2
 }
 h4 {
     display: flex;
@@ -81,11 +91,6 @@ button:active {
     box-shadow: 0 5px rgb(43, 43, 43);
     transform: translateY(3px);
   }
-#favMovies {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
 .return {
     display: flex;
     justify-content: center;

@@ -113,6 +113,15 @@ async function removeFromDatabase(movieID) {        /// This function removes Mo
 }
 
 
+
+
+
+
+
+
+
+
+
 const showQueryBtn = document.querySelector('#queryBtn');    /// Search MovieBase Button!      
 showQueryBtn.addEventListener('click', () => {             /// .  Takes the input field value and searches the Database collection Favorites
     const queryValue = queryInput.value
@@ -122,10 +131,12 @@ showQueryBtn.addEventListener('click', () => {             /// .  Takes the inpu
 
 })
 
+
 async function movieQuery(queryValue) {      /// This function checks the database for the Value we put into the textfield on the site
                                           /// If we get a match, it also displays that movie in the DOM
     try {
 
+        
         const movieTitle = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
         const result = await getDocs(movieTitle);
 
@@ -134,7 +145,8 @@ async function movieQuery(queryValue) {      /// This function checks the databa
             const favoritesMov = `
                     
                     <h3>${movie.data().Movie}: Was found in the database</h3>
-              
+     
+        
             `;
             qfavEl.insertAdjacentHTML('beforeend', favoritesMov);
         });
