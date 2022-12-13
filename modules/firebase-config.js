@@ -32,5 +32,5 @@
   const db = getFirestore(app);
 
 
-  export { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, collectionGroup , increment }
+  export { getFirestore, db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, collectionGroup , increment }
 /////////////////////

@@ -43,14 +43,8 @@ article {
     grid-template-columns: repeat(4,1fr);
     grid-auto-rows: auto;
     width: 800px;
-
-}
-.favMovieDiv {
-    display: flex;
-    justify-content: space-around;
     align-items: center;
-    height: 45px;
-    grid-column: 2/3;
+
 }
 .inputFields {
     display: flex;
@@ -58,7 +52,6 @@ article {
 }
 h3 {
     margin: 0.5rem;
-    grid-column: 1/2
 }
 h4 {
     display: flex;
@@ -116,6 +109,9 @@ button:active {
 .removeFavBtn {
     background-color: yellow;
     font-weight: 600;
+    text-align: center;
+    justify-content: center;;
+    margin: 0.3rem;
    }
 .queryFav {
     display: flex;

@@ -1,5 +1,7 @@
-import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, increment, collectionGroup } from './firebase-config.js';
-
+import { db, collection, getDocs } from './modules/firebase-config.js'
+import { movieQuery } from './modules/movieQuery.js';
+import { removeFromDatabase } from './modules/removeData.js';
+import { addFav } from './modules/saveData.js';
 
 const inputTitle = document.querySelector('#title');
 const inputGenre = document.querySelector('#genre');
@@ -13,14 +15,13 @@ const backBtn = document.querySelector('#backBtn');
 
 const mainElem = document.querySelector('main');
 const footerElem = document.querySelector('footer');
-const qfavEl = document.querySelector('.queryFav');
 const q = document.querySelector('.qContainer');
 const favMovElem = document.querySelector('#favMovies');
+const showQueryBtn = document.querySelector('#queryBtn');    /// Search MovieBase Button!   
 
 /////////////////////////////////////////////
 
 addFavBtn.addEventListener('click', () => {       /// .  This Button Adds the Movie with Genre and Release Date to Database collection
-    console.log('AddFav');
     const addTitle = inputTitle.value;
     const addGenre = inputGenre.value;
     const addDate = inputDate.value;
@@ -31,25 +32,17 @@ addFavBtn.addEventListener('click', () => {       /// .  This Button Adds the Mo
     addFav(addTitle, addGenre, addDate);
 });
 
-async function addFav(addTitle, addGenre, addDate) {  ///     This function adds MovieTitle Genre and Relase Date to database.
-
-    try {
-        await addDoc(collection(db, 'Favorites'), {
-            Movie: addTitle,
-            Genre: addGenre,
-            Release_Date: addDate
-        });
-    } catch (error) {
-        console.log('ERROR:', error);
-    }
-}
-
 showFavBtn.addEventListener('click', () => {                        // .  This button show all our favorite movies
     getFavMovie()
 })
 
 backBtn.addEventListener('click', () => {                 //// .  Takes us Back to Start Page 
     window.location.reload();
+})
+   
+showQueryBtn.addEventListener('click', () => {             /// .  Takes the input field value and searches the Database collection Favorites
+    const queryValue = queryInput.value
+    movieQuery(queryValue)
 })
 
 async function getFavMovie() {                                             /////                This function show all our saved favorite movies
@@ -64,15 +57,16 @@ async function showFavMovie() {        /// .  Show all saved Favorite movies in 
 
     const favMovies = await getDocs(collection(db, 'Favorites'));
     favMovies.forEach((movie) => {
-
+        // <div class="favMovieDiv">
+        //          </div>
         const favorites = `
             <article>
-                <div class="favMovieDiv">
+              
                 <h3>${movie.data().Movie}:</h3>
-                <p>${movie.data().Genre},</p>
+                <p>${movie.data().Genre}</p>
                 <p>Relase Date: ${movie.data().Release_Date}</p>
                 <button class="removeFavBtn" movie_id="${movie.id}">Remove</button>
-                </div>
+           
             </article>    
         `;
         mainElem.style.display = 'none'
@@ -93,8 +87,7 @@ function addRemoveClick() {               ////                       Adds click 
             const movieID = event.target.getAttribute('movie_id');
             await removeFromDatabase(movieID)
 
-
-            const movieDelete = document.querySelectorAll('.favMovieDiv')
+            const movieDelete = document.querySelectorAll('article')
             movieDelete.forEach((div) => {
                 div.remove()
             });
@@ -103,56 +96,4 @@ function addRemoveClick() {               ////                       Adds click 
         })
     })
 }
-
-async function removeFromDatabase(movieID) {        /// This function removes Movie from the database based on ID
-    try {
-        await deleteDoc(doc(db, 'Favorites', movieID))
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-const showQueryBtn = document.querySelector('#queryBtn');    /// Search MovieBase Button!      
-showQueryBtn.addEventListener('click', () => {             /// .  Takes the input field value and searches the Database collection Favorites
-    const queryValue = queryInput.value
-
-    console.log(queryValue);
-    movieQuery(queryValue)
-
-})
-
-
-async function movieQuery(queryValue) {      /// This function checks the database for the Value we put into the textfield on the site
-                                          /// If we get a match, it also displays that movie in the DOM
-    try {
-
-        
-        const movieTitle = query(collection(db, 'Favorites'), where('Movie', '==', queryValue));
-        const result = await getDocs(movieTitle);
-
-        result.forEach((movie) => {
-            
-            const favoritesMov = `
-                    
-                    <h3>${movie.data().Movie}: Was found in the database</h3>
-     
-        
-            `;
-            qfavEl.insertAdjacentHTML('beforeend', favoritesMov);
-        });
-
-    } catch (error) {
-        console.log(error);
-    }
-};
 
