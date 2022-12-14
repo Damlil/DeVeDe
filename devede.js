@@ -12,12 +12,11 @@ const addFavBtn = document.querySelector('#addFav');
 const showFavBtn = document.querySelector('#showFav');
 const backBtn = document.querySelector('#backBtn');
 
-
 const mainElem = document.querySelector('main');
 const footerElem = document.querySelector('footer');
 const q = document.querySelector('.qContainer');
 const favMovElem = document.querySelector('#favMovies');
-const showQueryBtn = document.querySelector('#queryBtn');    /// Search MovieBase Button!   
+const showQueryBtn = document.querySelector('#queryBtn');    
 
 /////////////////////////////////////////////
 
