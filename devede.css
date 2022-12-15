@@ -94,7 +94,11 @@ button:active {
 #backBtn {
     display: none;
 }
-.queryEl {
+/* .queryEl {
+    display: flex;
+    justify-content: center;
+} */
+#queryForm {
     display: flex;
     justify-content: center;
 }
@@ -116,6 +120,10 @@ button:active {
     justify-content: center;;
     margin: 0.3rem;
    }
+.queryEl {
+    display: flex;
+    justify-content: center;
+}
 .queryFav {
     display: flex;
     align-items: center;
@@ -130,7 +138,8 @@ button:active {
 
 @media only screen and (max-width: 850px) {
 
-.inputFields {
+#formReset {
+    display: flex;
     flex-direction: column;
 }
 h4 {

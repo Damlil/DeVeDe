@@ -6,11 +6,12 @@ import { addFav } from './modules/saveData.js';
 const inputTitle = document.querySelector('#title');
 const inputGenre = document.querySelector('#genre');
 const inputDate = document.querySelector('#date');
-const queryInput = document.querySelector('#query');
+const queryInput = document.querySelector('#query')
 
-const addFavBtn = document.querySelector('#addFav');
+const addFavBtn = document.querySelector('#addFav')
 const showFavBtn = document.querySelector('#showFav');
 const backBtn = document.querySelector('#backBtn');
+const inputF = document.querySelector('.inputFields')
 
 const mainElem = document.querySelector('main');
 const footerElem = document.querySelector('footer');
@@ -26,9 +27,12 @@ addFavBtn.addEventListener('click', () => {       /// .  This Button Adds the Mo
     const addDate = inputDate.value;
     if (addTitle == '' || addGenre == '' || addDate == '') {
         alert('Please fill out all fields')
-        return
-    }
+       return
+    } else { alert ('Thanks for your submit!')}
+ 
     addFav(addTitle, addGenre, addDate);
+    document.getElementById('formReset').reset();
+
 });
 
 showFavBtn.addEventListener('click', () => {                        // .  This button show all our favorite movies
@@ -42,6 +46,8 @@ backBtn.addEventListener('click', () => {                 //// .  Takes us Back 
 showQueryBtn.addEventListener('click', () => {             /// .  Takes the input field value and searches the Database collection Favorites
     const queryValue = queryInput.value
     movieQuery(queryValue)
+    document.getElementById('queryForm').reset();
+
 })
 
 async function getFavMovie() {                                             /////                This function show all our saved favorite movies

@@ -13,11 +13,13 @@
     </header>
     <main>
       
-        <div class="inputFields">
+  
+
+        <form id="formReset">
             <input id="title" type="text" placeholder="Title"> 
             <input id="genre" type="text" placeholder="Genre"> 
             <input id="date" type="number" placeholder="Release Year">
-        </div> 
+        </form> 
 
         <div class="addShow">
             <button id="addFav" >Add movie to favorites</button>
@@ -29,6 +31,7 @@
     <section id="favMovies">
     </section>
 
+    
     <div class="return">
      <button id="backBtn">Take me Back</button>
     </div>
@@ -37,8 +40,11 @@
         <h4></h4>
         <div class="queryFav">
         </div>
+
         <div class="queryEl">
-            <input id="query" type="text" placeholder="Search Movies"> 
+             <form id="queryForm">
+                <input id="query" type="text" placeholder="Search Movies"> 
+             </form>
             <button id="queryBtn">Check database</button>
          </div>
 
