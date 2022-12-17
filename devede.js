@@ -62,8 +62,6 @@ async function showFavMovie() {        /// .  Show all saved Favorite movies in 
 
     const favMovies = await getDocs(collection(db, 'Favorites'));
     favMovies.forEach((movie) => {
-        // <div class="favMovieDiv">
-        //          </div>
         const favorites = `
             <article>
               
